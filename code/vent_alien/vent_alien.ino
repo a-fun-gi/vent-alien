@@ -1,3 +1,9 @@
+/*
+* created by a-fun-gi 2026
+* https://a-fun-gi.github.io/website
+* submitted to the stardance challenge (https://stardance.hackclub.com)
+*/
+
 #include <SoftwareSerial.h>
 #include <DFRobotDFPlayerMini.h>
 #include <Servo.h>
@@ -13,8 +19,17 @@ DFRobotDFPlayerMini player;
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+  softwareSerial.begin(9600);
+  Serial.println("initialising dfplayer");
+  if (!player.begin(softwareSerial)) {
+    Serial.print("initialisation failed");
+  }
+  else {Serial.println("success!");}
   servo.attach(6);
   servo.write(180);
+  player.volume(30); //max volume baby
+  player.play(1);
 }
 
 void loop() {
